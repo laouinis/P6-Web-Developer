@@ -1,9 +1,9 @@
-const BCRYPt = require('bcrypt');
+const BCRYPT = require('bcrypt');
 const USERMODULE = require('../models/users');
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req, res, next) =>{
-  BCRYPt.hash(req.body.password, 10)
+  BCRYPT.hash(req.body.password, 10)
       .then((hash) => {
         const user = new USERMODULE({
           email: req.body.email,
@@ -23,7 +23,7 @@ exports.login = (req, res, next) => {
           res.status(401).json({message:
             'User or password is incorrect !'});
         } else {
-          BCRYPt.compare(req.body.password, user.password)
+          BCRYPT.compare(req.body.password, user.password)
               .then((valid) => {
                 if(!valid) {
                   res.status(401).json({message:
@@ -33,7 +33,7 @@ exports.login = (req, res, next) => {
                     userId: user._id,
                     token: jwt.sign(
                       {userId: user._id},
-                      'RANDOM_TOKEN_SECRET',
+                      'RANDOM_TOKEN',
                       {expiresIn: '24h'},
                     ),
                   });
