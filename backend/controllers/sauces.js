@@ -22,4 +22,11 @@ exports.findOneSauces = (req, res, next) => {
       .catch((error) => res.status(400).json({error}));
 };
 
+exports.modifySauces = (req, res, next) => {
+  sauces.updateOne({_id: req.params.id},
+    {...req.body, _id: req.params.id})
+        .then(() => res.status(200).json({message: 'Sauce updated !'}))
+        .catch((error) => res.status(400).json({error}));
+};
+
 
