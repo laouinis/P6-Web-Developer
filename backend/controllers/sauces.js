@@ -16,4 +16,10 @@ exports.findSauces = (req, res, next) => {
       .catch((error) => res.status(400).json({error}));
 };
 
+exports.findOneSauces = (req, res, next) => {
+  sauces.findOne()
+      .then((sauces) => res.status(200).json(sauces))
+      .catch((error) => res.status(400).json({error}));
+};
+
 
