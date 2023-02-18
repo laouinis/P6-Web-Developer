@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const app =express();
 const path = require('path');
 const mongoose = require('mongoose');
-const userRouter = require('./routes/users');
-const sauceRouter = require('./routes/sauces');
+const routesUsers = require('./routes/users');
+const routesSauces = require('./routes/sauces');
 
 mongoose.connect(process.env.keyConnection,
     {
@@ -18,19 +18,19 @@ mongoose.connect(process.env.keyConnection,
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
   );
   res.setHeader(
-      'Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH, OPTIONS',
+    'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS'
   );
   next();
 });
 
 app.use(bodyParser.json());
 app.use(express.json());
-app.use('/api/auth', userRouter);
-app.use('/api/sauces', sauceRouter);
+app.use('/api/auth', routesUsers);
+app.use('/api/sauces', routesSauces);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
