@@ -1,6 +1,8 @@
-const express = require('express');
-const app =express();
 require('dotenv').config({path: '../.env'});
+const express = require('express');
+const bodyParser = require('body-parser')
+const app =express();
+const path = require('path');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/users');
 const sauceRouter = require('./routes/sauces');
@@ -25,8 +27,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.json());
 app.use(express.json());
 app.use('/api/auth', userRouter);
 app.use('/api/sauces', sauceRouter);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
