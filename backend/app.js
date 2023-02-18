@@ -1,10 +1,11 @@
 const express = require('express');
 const app =express();
+require('dotenv').config({path: '../.env'});
 const mongoose = require('mongoose');
 const userRouter = require('./routes/users');
 const sauceRouter = require('./routes/sauces');
 
-mongoose.connect('mongodb+srv://P6-Piicante:P6-Piicante@cluster0.kjvux2p.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.keyConnection,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
