@@ -1,7 +1,7 @@
 const Sauces = require('../models/sauces');
 const fs = require('fs');
 
-exports.createSauces = (req, res, next) => {
+exports.createSauces = (req, res) => {
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   delete sauceObject._userId;
@@ -27,7 +27,7 @@ exports.findOneSauce = (req, res) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.modifySauces = (req, res, next) => {
+exports.modifySauces = (req, res) => {
   const sauceObject = req.file ? {
     ...JSON.parse(req.body.sauce),
     imageUrl: `${ req.protocol }://${ req.get('host') }/images/${ req.file.filename }`
