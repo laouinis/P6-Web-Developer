@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const routesUsers = require('./routes/users');
 const routesSauces = require('./routes/sauces');
 
+// Data Base connection and SetHeader
 mongoose.connect(process.env.keyConnection,
     {
       useNewUrlParser: true,

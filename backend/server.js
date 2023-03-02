@@ -1,6 +1,11 @@
 const http = require('http');
 const app = require('./app');
 
+/**
+ * Port normalize
+ * @param {String} val String representation of the port number
+ * @returns {String}  Normalisedport number
+ */
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
   if(isNaN(port)) {
@@ -15,6 +20,10 @@ const normalizePort = (val) => {
 const port = normalizePort(process.env.PORT ||'3000');
 app.set('port', port);
 
+/**
+ * Handles server startup errors related to port binding
+ * @param {Error} error The error related to port binding
+ */
 const errorHandler = (error) => {
   if(error.syscall !== 'listen') {
     throw error;
